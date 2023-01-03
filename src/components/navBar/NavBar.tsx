@@ -1,4 +1,3 @@
-import {ReactNode} from 'react';
 import {
     Avatar,
     Box,
@@ -17,11 +16,11 @@ import {
     useDisclosure,
 } from '@chakra-ui/react';
 import {AddIcon, CloseIcon, HamburgerIcon} from '@chakra-ui/icons';
-import {Outlet} from "react-router-dom";
+import {Link as ReachLink, Outlet} from "react-router-dom";
 
-const Links = ['template', 'test'];
+const Links = ['record', 'template', 'test'];
 
-const NavLink = ({children}: { children: ReactNode }, link: string = "") => (
+const NavLink = (props: { title: string }) => (
     <Link
         px={2}
         py={1}
@@ -30,8 +29,9 @@ const NavLink = ({children}: { children: ReactNode }, link: string = "") => (
             textDecoration: 'none',
             bg: useColorModeValue('gray.200', 'gray.700'),
         }}
-        href={link}>
-        {children}
+        as={ReachLink}
+        to={props.title}>
+        {props.title}
     </Link>
 );
 
@@ -60,11 +60,7 @@ export default function NavBarWithAction() {
                             spacing={4}
                             display={{base: 'none', md: 'flex'}}>
                             {Links.map((link) => (
-                                <NavLink key={link}>
-                                    <Link href={link}>
-                                        {link}
-                                    </Link>
-                                </NavLink>
+                                <NavLink title={link}/>
                             ))}
                         </HStack>
                     </HStack>
@@ -105,7 +101,7 @@ export default function NavBarWithAction() {
                     <Box pb={4} display={{md: 'none'}}>
                         <Stack as={'nav'} spacing={4}>
                             {Links.map((link) => (
-                                <NavLink key={link}>{link}</NavLink>
+                                <NavLink title={link}/>
                             ))}
                         </Stack>
                     </Box>

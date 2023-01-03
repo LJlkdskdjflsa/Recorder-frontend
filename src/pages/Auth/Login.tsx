@@ -10,8 +10,8 @@ import {
 } from "@chakra-ui/react";
 import {useForm} from "react-hook-form";
 import {useNavigate} from "react-router-dom";
-import {ThemeToggler} from "../components/Theme/ThemeToggler";
-import {useAuth} from "../hooks/useAuth";
+import {ThemeToggler} from "../../components/theme/ThemeToggler";
+import {useAuth} from "../../hooks/useAuth";
 
 export const Login = () => {
     const {handleSubmit, register, formState: {errors, isSubmitting}} = useForm();

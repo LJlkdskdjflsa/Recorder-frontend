@@ -1,9 +1,9 @@
 import React, {useEffect, useRef, useState} from "react";
 import axiosInstance from "../../services/axios";
-import {Box, Container} from "@chakra-ui/react";
-import {RecordCard} from "../../components/Record/RecordCard";
-import {Loading} from "../../components/Loading";
-import {AddUpdateRecordModal} from "../../components/Record/AddUpdateRecordModal";
+import {Box, Button, Container} from "@chakra-ui/react";
+import {Card} from "../../components/record/Card";
+import {Loading} from "../../components/loading";
+import {NavLink} from "react-router-dom";
 
 interface Record {
     _id: string;
@@ -13,7 +13,7 @@ interface Record {
     updated_at: string;
 }
 
-export const RecordList = () => {
+export const List = () => {
     const [records, setRecords] = useState<Record[]>([]);
     const [loading, setLoading] = useState(true);
     const isMounted = useRef(false);
@@ -43,13 +43,15 @@ export const RecordList = () => {
 
     console.log(records)
     return <Container mt={9}>
-        <AddUpdateRecordModal onSuccess={fetchRecords}/>
+
+        <NavLink to={"/template"}><Button w="100%" colorScheme="green">Create New Record </Button></NavLink>
+
         {loading ? (
             <Loading/>
         ) : (
             <Box mt={6}>
                 {records?.map((record) => (
-                    <RecordCard record={record} key={record._id}/>
+                    <Card record={record} key={record._id}/>
                 ))}
             </Box>
         )}

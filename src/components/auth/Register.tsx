@@ -10,7 +10,7 @@ import {
     useColorModeValue,
     useToast
 } from "@chakra-ui/react";
-import {ThemeToggler} from "../Theme/ThemeToggler";
+import {ThemeToggler} from "../theme/ThemeToggler";
 import axiosInstance from "../../services/axios";
 
 export const Register = () => {

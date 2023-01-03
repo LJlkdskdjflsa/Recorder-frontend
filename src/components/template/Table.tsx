@@ -6,7 +6,7 @@ import {Container, useColorModeValue} from "@chakra-ui/react";
 
 // Make modifications to the theme with your own fields and widgets
 
-export const TestPage = () => {
+export const ListTable = () => {
     const Form = withTheme(ChakraUITheme);
     const [formData, setFormData] = React.useState(null);
     const background = useColorModeValue("gray.300", "gray.600");

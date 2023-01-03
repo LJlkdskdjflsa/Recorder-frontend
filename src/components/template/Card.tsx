@@ -1,7 +1,5 @@
-import {Badge, Box, Circle, Flex, Image, Link, Spacer, useColorModeValue, useToast,} from '@chakra-ui/react';
-import {AddIcon} from "@chakra-ui/icons";
-import axiosInstance from "../../services/axios";
-import {Template} from "../../type/Basic";
+import {Box, Circle, Flex, Image, Link, useColorModeValue,} from '@chakra-ui/react';
+import {AddNewRecordButton} from "./AddNewRecordButton";
 
 const data = {
     isNew: true,
@@ -21,30 +19,7 @@ interface Props {
 
 
 function TemplateCard(props: Props) {
-    const toast = useToast();
-    const createRecord = async (template: Template) => {
-        try {
 
-            await axiosInstance.post(`/records/create/`, {
-                "title": "Test",
-                "data": {}
-            });
-            toast({
-                title: "Record Created",
-                status: "success",
-                isClosable: true,
-                duration: 1500,
-            });
-        } catch (err) {
-            console.error(err);
-            toast({
-                title: "Something went wrong. Please try again.",
-                status: "error",
-                isClosable: true,
-                duration: 1500,
-            });
-        }
-    };
     return (
         <Flex p={50} w="full" alignItems="center" justifyContent="center">
             <Box
@@ -71,15 +46,9 @@ function TemplateCard(props: Props) {
                 />
 
                 <Box p="6">
-                    <Flex alignItems="baseline">
-                        {data.isNew && (
-                            <Badge rounded="full" px="2" fontSize="0.8em" colorScheme="red">
-                                New
-                            </Badge>
-                        )}
-                        <Spacer/>
-                        <AddIcon boxSize={6}/>
-                    </Flex>
+
+                    <AddNewRecordButton templateId={props._id}/>
+
                     <Flex mt="1" justifyContent="space-between" alignContent="center">
                         <Box
                             fontSize="2xl"

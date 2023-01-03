@@ -21,19 +21,20 @@ import {useParams} from "react-router-dom";
 import axiosInstance from "../../services/axios";
 
 
-export const AddUpdateTemplateModal = ({
-                                           editable = false, onSuccess = () => {
-    }, ...rest
-                                       }) => {
+export const AddUpdateRecordModal = ({
+                                         editable = false,
+                                         defaultValues = {
+                                             title: "Default Title",
+                                             data: {}
+                                         },
+                                         onSuccess = () => {
+                                         },
+                                         ...rest
+                                     }) => {
     const {isOpen, onOpen, onClose} = useDisclosure();
     const toast = useToast();
-    const {templateId} = useParams();
-    const defaultValues = {
-        title: "Default Title",
-        description: "Default description",
-        json_schema: "{}",
-        ui_schema: "{}"
-    }
+    const {recordId} = useParams();
+
     const {
         handleSubmit,
         register,
@@ -44,19 +45,14 @@ export const AddUpdateTemplateModal = ({
     });
 
     const onSubmit = async (values: any) => {
-        console.log(values);
-        values.json_schema = JSON.parse(values.json_schema)
-        values.ui_schema = JSON.parse(values.ui_schema)
-
-        console.log(values);
         try {
             if (editable) {
-                await axiosInstance.put(`/templates/${templateId}`, values);
+                await axiosInstance.put(`/records/${recordId}`, values);
             } else {
-                await axiosInstance.post(`/templates/create/`, values);
+                await axiosInstance.post(`/records/create/`, values);
             }
             toast({
-                title: editable ? "Template Updated" : "Template Added",
+                title: editable ? "record Updated" : "record Added",
                 status: "success",
                 isClosable: true,
                 duration: 1500,
@@ -74,10 +70,14 @@ export const AddUpdateTemplateModal = ({
         }
     };
 
+    // @ts-ignore
+    // @ts-ignore
+    // @ts-ignore
+    // @ts-ignore
     return (
         <Box {...rest}>
             <Button w="100%" colorScheme="green" onClick={onOpen}>
-                {editable ? "Update Template" : "ADD Template"}
+                {editable ? "Update record" : "ADD record"}
             </Button>
             <Modal
                 closeOnOverlayClick={false}
@@ -89,12 +89,12 @@ export const AddUpdateTemplateModal = ({
                 <ModalOverlay/>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <ModalContent>
-                        <ModalHeader>{editable ? "Update Template" : "ADD Template"}</ModalHeader>
+                        <ModalHeader>{editable ? "Update record" : "ADD record"}</ModalHeader>
                         <ModalCloseButton/>
                         <ModalBody>
                             <FormControl isInvalid={errors.title !== undefined}>
                                 <Input
-                                    placeholder="Template Title...."
+                                    placeholder="Record Title...."
                                     background={useColorModeValue("gray.300", "gray.600")}
                                     type="text"
                                     variant="filled"
@@ -110,47 +110,6 @@ export const AddUpdateTemplateModal = ({
                                             value: 55,
                                             message: "Title must be at most 55 characters",
                                         },
-                                    })}
-                                />
-                                <Input
-                                    placeholder="Template Description...."
-                                    background={useColorModeValue("gray.300", "gray.600")}
-                                    type="text"
-                                    variant="filled"
-                                    size="lg"
-                                    mt={6}
-                                    {...register("description", {
-                                        required: "This is required field",
-                                        minLength: {
-                                            value: 5,
-                                            message: "Title must be at least 5 characters",
-                                        },
-                                        maxLength: {
-                                            value: 55,
-                                            message: "Title must be at most 55 characters",
-                                        },
-                                    })}
-                                />
-                                <Input
-                                    placeholder="Template Json Schema...."
-                                    background={useColorModeValue("gray.300", "gray.600")}
-                                    type="text"
-                                    variant="filled"
-                                    size="lg"
-                                    mt={6}
-                                    {...register("json_schema", {
-                                        required: "This is required field",
-                                    })}
-                                />
-                                <Input
-                                    placeholder="Template UI Schema...."
-                                    background={useColorModeValue("gray.300", "gray.600")}
-                                    type="text"
-                                    variant="filled"
-                                    size="lg"
-                                    mt={6}
-                                    {...register("ui_schema", {
-                                        required: "This is required field",
                                     })}
                                 />
                                 <FormErrorMessage>

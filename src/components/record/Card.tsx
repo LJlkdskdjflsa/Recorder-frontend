@@ -3,7 +3,7 @@ import React from "react";
 import {useNavigate} from "react-router-dom";
 
 // @ts-ignore
-export const RecordCard = ({record}) => {
+export const Card = ({record}) => {
     const navigate = useNavigate();
     return (
         <Flex
@@ -19,7 +19,7 @@ export const RecordCard = ({record}) => {
                 cursor: "pointer",
                 transform: "translateY(-3px)",
             }}
-            onClick={() => navigate(`record/${record._id}`, {replace: true})}
+            onClick={() => navigate(`/record/${record._id}`, {replace: true})}
         >
             <Text>{record.title}</Text>
             <Badge colorScheme={record.status ? "green" : "purple"}>

@@ -20,7 +20,7 @@ const fetchPokemons = async (
     ).then(async (res) => await res.json());
 };
 
-export const Table: FC = () => {
+const Home: FC = () => {
     // states
     const [pokemonsTotal, setPokemonsTotal] = useState<number | undefined>(
         undefined
@@ -199,3 +199,4 @@ export const Table: FC = () => {
     );
 };
 
+export default Home;

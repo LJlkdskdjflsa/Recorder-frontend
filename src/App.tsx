@@ -1,18 +1,19 @@
 import React from 'react';
 import './App.css';
 import {BrowserRouter as Router, Navigate, Route, Routes} from "react-router-dom";
-import {Login} from "./pages/Login";
-import {Register} from "./components/Auth/Register";
+import {Login} from "./pages/Auth/Login";
+import {Register} from "./components/auth/Register";
 import {AuthConsumer, AuthProvider} from "./context/JWTAuthContext";
 import {Flex, Spinner} from "@chakra-ui/react";
-import {PublicRoute} from "./components/Auth/PublicRoute";
-import {PrivateRoute} from "./components/Auth/PrivateRoute";
-import {RecordList} from "./pages/Record/RecordList";
-import {RecordDetail} from "./pages/Record/RecordDetail";
-import NavBarWithAction from "./components/NavBar/NavBar";
-import {TestPage} from "./pages/TestPage";
-import {TemplateList} from "./pages/Template/TemplateList";
-import {TemplateDetail} from "./pages/Template/TemplateDetail";
+import {PublicRoute} from "./components/auth/PublicRoute";
+import {PrivateRoute} from "./components/auth/PrivateRoute";
+import {List as RecordListPage} from "./pages/Record/List";
+import {Detail as RecordDetailPage} from "./pages/Record/Detail";
+import NavBarWithAction from "./components/navBar/NavBar";
+import {TestPageJsonSchemaForm} from "./pages/Test/TestPageJsonSchemaForm";
+import {Detail as TemplateDetailPage} from "./pages/Template/Detail";
+import HomePage from "./pages/Home";
+import {List as TemplateListPage} from "./pages/Template/List";
 
 
 function App() {
@@ -34,28 +35,30 @@ function App() {
                                 </Flex>
                             ) : (
                                 <Routes>
+                                    <Route path={"/"} element={<HomePage/>}></Route>
                                     <Route path={"/login"} element={<PublicRoute><Login/></PublicRoute>}></Route>
                                     <Route path={"/register"} element={<PublicRoute><Register/></PublicRoute>}></Route>
                                     <Route path={"/"} element={<PrivateRoute><NavBarWithAction/></PrivateRoute>}>
-                                        <Route path={"/"} element={<RecordList/>}></Route>
-                                        <Route path={"/test"} element={<TestPage/>}></Route>
+                                        <Route path={"/test"} element={<TestPageJsonSchemaForm/>}></Route>
                                         <Route path={"/template"}>
-                                            <Route path={""} element={<TemplateList/>}></Route>
+                                            <Route path={""} element={<TemplateListPage/>}></Route>
+
                                             <Route
                                                 path={"/template/:templateId"}
                                                 element={
-                                                    <TemplateDetail/>
+                                                    <TemplateDetailPage/>
                                                 }
                                             />
                                         </Route>
-                                        <Route path={""} element={<RecordList/>}></Route>
 
-                                        <Route path={"/record"}> <Route
-                                            path="/record/:recordId"
-                                            element={
-                                                <RecordDetail/>
-                                            }
-                                        /></Route>
+                                        <Route path={"/record"}>
+                                            <Route path={""} element={<RecordListPage/>}></Route>
+                                            <Route
+                                                path="/record/:recordId"
+                                                element={
+                                                    <RecordDetailPage/>
+                                                }
+                                            /></Route>
 
 
                                     </Route>
