@@ -7,13 +7,13 @@ import {AuthConsumer, AuthProvider} from "./context/JWTAuthContext";
 import {Flex, Spinner} from "@chakra-ui/react";
 import {PublicRoute} from "./components/auth/PublicRoute";
 import {PrivateRoute} from "./components/auth/PrivateRoute";
-import {List as RecordListPage} from "./pages/Record/List";
+import {ALLRecord as RecordListPage} from "./pages/Record/ALLRecord";
 import {Detail as RecordDetailPage} from "./pages/Record/Detail";
 import NavBarWithAction from "./components/navBar/NavBar";
 import {TestPageJsonSchemaForm} from "./pages/Test/TestPageJsonSchemaForm";
 import {Detail as TemplateDetailPage} from "./pages/Template/Detail";
 import HomePage from "./pages/Home";
-import {List as TemplateListPage} from "./pages/Template/List";
+import {AllTemplate as TemplateListPage} from "./pages/Template/AllTemplate";
 
 
 function App() {
@@ -42,7 +42,6 @@ function App() {
                                         <Route path={"/test"} element={<TestPageJsonSchemaForm/>}></Route>
                                         <Route path={"/template"}>
                                             <Route path={""} element={<TemplateListPage/>}></Route>
-
                                             <Route
                                                 path={"/template/:templateId"}
                                                 element={

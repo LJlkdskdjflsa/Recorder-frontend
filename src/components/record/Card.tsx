@@ -22,6 +22,7 @@ export const Card = ({record}) => {
             onClick={() => navigate(`/record/${record._id}`, {replace: true})}
         >
             <Text>{record.title}</Text>
+            <Text>{record.template.title}</Text>
             <Badge colorScheme={record.status ? "green" : "purple"}>
                 {record.status ? "Complete" : "Pending"}
             </Badge>

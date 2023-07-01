@@ -21,10 +21,11 @@ import {useParams} from "react-router-dom";
 import axiosInstance from "../../services/axios";
 
 
-export const AddUpdateTemplateModal = ({
-                                           editable = false, onSuccess = () => {
+export const AddUpdateTemplateModal = (
+    {
+        editable = false, onSuccess = () => {
     }, ...rest
-                                       }) => {
+    }) => {
     const {isOpen, onOpen, onClose} = useDisclosure();
     const toast = useToast();
     const {templateId} = useParams();

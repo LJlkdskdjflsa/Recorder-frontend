@@ -15,5 +15,4 @@ export const TemplateIconView = (props: { templates: Template[] }) => {
                 />
             ))}
         </SimpleGrid>)
-
 }

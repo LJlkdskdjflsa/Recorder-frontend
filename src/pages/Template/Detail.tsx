@@ -64,6 +64,7 @@ export const Detail = () => {
                                 ui_schema: template.ui_schema
                             }}
                             onSuccess={fetchTemplate}
+                            // onSuccess={fetchItem(setLoading, `/templates/${templateId}`)}
                         /></Box>
                         <Box p={3}>
                             <DeleteTemplateButton templateId={templateId as string} loading={loading}

@@ -1,20 +1,13 @@
 import React, {useEffect, useRef, useState} from "react";
 import axiosInstance from "../../services/axios";
-import {Box, Button, Container} from "@chakra-ui/react";
-import {Card} from "../../components/record/Card";
+import {Button, Container} from "@chakra-ui/react";
 import {Loading} from "../../components/loading";
 import {NavLink} from "react-router-dom";
+import {RecordFromBackend} from "../../type/RecordFromBackend";
+import {RecordTable} from "../../components/record/RecordTable";
 
-interface Record {
-    _id: string;
-    title: string;
-    description: string;
-    created_at: string;
-    updated_at: string;
-}
-
-export const List = () => {
-    const [records, setRecords] = useState<Record[]>([]);
+export const ALLRecord = () => {
+    const [records, setRecords] = useState<RecordFromBackend[]>([]);
     const [loading, setLoading] = useState(true);
     const isMounted = useRef(false);
 
@@ -49,11 +42,12 @@ export const List = () => {
         {loading ? (
             <Loading/>
         ) : (
-            <Box mt={6}>
-                {records?.map((record) => (
-                    <Card record={record} key={record._id}/>
-                ))}
-            </Box>
+            // <Box mt={6}>
+            //     {records?.map((record) => (
+            //         <Card record={record} key={record._id}/>
+            //     ))}
+            // </Box>
+            <RecordTable records={records}/>
         )}
     </Container>
 }
